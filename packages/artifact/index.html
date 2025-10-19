@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI Artifacts</title>
+    </head>
+    <body class="h-screen w-screen m-0">
+        <div class="h-full w-full bg-gray-200 flex flex-col">
+            <!-- 控制按钮区域 -->
+            <div class="flex gap-4 p-4 bg-white shadow-sm">
+                <button
+                    id="change-react"
+                    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                >
+                    React Component
+                </button>
+                <button
+                    id="change-vue"
+                    class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+                >
+                    Vue Component
+                </button>
+                <button
+                    id="change-html"
+                    class="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors"
+                >
+                    HTML Page
+                </button>
+                <button
+                    id="change-v2"
+                    class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors"
+                >
+                    Version v2
+                </button>
+            </div>
+
+            <!-- Artifacts 显示区域 -->
+            <div class="flex-1">
+                <ai-artifacts
+                    id="artifacts-element"
+                    store-id="default"
+                    group-id="react-component"
+                    version-id="v1"
+                ></ai-artifacts>
+            </div>
+        </div>
+
+        <script type="module">
+            import './src/index.tsx';
+            import { setArtifactStore } from './src/artifacts/global.js';
+            import { sampleData } from './public/sample-data.js';
+
+            // 设置示例数据到 store
+            setArtifactStore(sampleData);
+            console.log('注入数据');
+
+            // 按钮点击事件处理
+            const artifactsElement = document.getElementById('artifacts-element');
+
+            // 切换到 React Component
+            document.getElementById('change-react').addEventListener('click', () => {
+                artifactsElement.setAttribute('group-id', 'react-component');
+                artifactsElement.setAttribute('version-id', 'v1');
+            });
+
+            // 切换到 Vue Component
+            document.getElementById('change-vue').addEventListener('click', () => {
+                artifactsElement.setAttribute('group-id', 'vue-component');
+                artifactsElement.setAttribute('version-id', 'v1');
+            });
+
+            // 切换到 HTML Page
+            document.getElementById('change-html').addEventListener('click', () => {
+                artifactsElement.setAttribute('group-id', 'html-page');
+                artifactsElement.setAttribute('version-id', 'v1');
+            });
+
+            // 切换到 Version v2
+            document.getElementById('change-v2').addEventListener('click', () => {
+                artifactsElement.setAttribute('group-id', 'react-component');
+                artifactsElement.setAttribute('version-id', 'v2');
+            });
+        </script>
+    </body>
+</html>

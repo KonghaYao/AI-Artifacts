@@ -1,0 +1,37 @@
+{
+    "name": "ai-artifacts",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "src/artifacts/index.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build && node ./scripts/replace_uno_placeholder.mjs",
+        "preview": "vite preview",
+        "prepublish": "pnpm build"
+    },
+    "dependencies": {
+        "comlink": "^4.4.2",
+        "prismjs": "^1.30.0",
+        "solid-js": "^1.9.9"
+    },
+    "devDependencies": {
+        "prism-themes": "^1.9.0",
+        "solid-element": "^1.9.1",
+        "lucide-solid": "^0.546.0",
+        "@types/node": "^24.6.0",
+        "typescript": "~5.9.3",
+        "unocss": "^66.5.4",
+        "vite": "^7.1.7",
+        "vite-plugin-solid": "^2.11.8"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "esbuild"
+        ]
+    }
+}

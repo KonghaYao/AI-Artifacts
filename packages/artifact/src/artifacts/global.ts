@@ -1,10 +1,10 @@
-import { createStore } from "solid-js/store";
+import { createStore } from 'solid-js/store';
 
-export interface ArtifactGroup {
+export interface ArtifactType {
     id: string;
     filename: string;
     filetype: string;
-    versions: ArtifactElement[];
+    versions: ArtifactVersion[];
     created_at: string;
     updated_at: string;
 }
@@ -12,7 +12,7 @@ export interface ArtifactGroup {
 /**
  * ArtifactElement 是单个版本化的 Artifact，它帮助我们更新数据
  */
-export interface ArtifactElement {
+export interface ArtifactVersion {
     group_id: string;
     id: string;
     code: string;
@@ -25,5 +25,5 @@ export interface ArtifactElement {
 }
 
 export const [artifactStore, setArtifactStore] = createStore({
-    artifacts: {} as Record<string, ArtifactGroup[]>
-})
+    artifacts: {} as Record<string, ArtifactType[]>,
+});
