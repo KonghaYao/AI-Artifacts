@@ -20,6 +20,8 @@ interface ArtifactsContextType {
     setViewMode: Setter<ViewMode>;
     isLoading: Accessor<boolean>;
     setIsLoading: Setter<boolean>;
+    refreshCount: Accessor<number>;
+    refresh: () => void;
 }
 
 const ArtifactsContext = createContext<ArtifactsContextType>();
@@ -48,7 +50,10 @@ export const ArtifactsProvider = (props: {
     });
     const [viewMode, setViewMode] = createSignal<ViewMode>('preview');
     const [isLoading, setIsLoading] = createSignal<boolean>(false);
-
+    const [refreshCount, setRefreshCount] = createSignal<number>(0);
+    const refresh = () => {
+        setRefreshCount(refreshCount() + 1);
+    };
     return (
         <ArtifactsContext.Provider
             value={{
@@ -64,6 +69,8 @@ export const ArtifactsProvider = (props: {
                 setViewMode: setViewMode,
                 isLoading,
                 setIsLoading: setIsLoading,
+                refreshCount: refreshCount,
+                refresh: refresh,
             }}
         >
             {props.children}

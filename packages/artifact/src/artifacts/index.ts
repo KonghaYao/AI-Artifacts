@@ -1,5 +1,7 @@
 import { solidToWebComponent } from '../wc/index';
 import { ArtifactViewer } from './ArtifactViewer';
+export * from './ArtifactViewer';
+export * from '../wc/index';
 import 'virtual:uno.css';
 
 solidToWebComponent(

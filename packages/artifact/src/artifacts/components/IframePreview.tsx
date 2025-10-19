@@ -1,10 +1,10 @@
-import { createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal, on } from 'solid-js';
 import { wrap, windowEndpoint } from 'comlink';
 import { Loader2 } from 'lucide-solid';
 import { useArtifacts } from '../Artifacts';
 
 export const IframePreview = () => {
-    const { currentArtifact, setIsLoading, isLoading } = useArtifacts();
+    const { currentArtifact, setIsLoading, isLoading, refreshCount } = useArtifacts();
     const [iframeRef, setIframeRef] = createSignal<HTMLIFrameElement | undefined>(undefined);
 
     const getIframeAPI = async (iframe: HTMLIFrameElement) => {
@@ -46,10 +46,17 @@ export const IframePreview = () => {
     };
 
     createEffect(() => {
-        if (iframeRef()) {
+        if (iframeRef() && currentArtifact()) {
             runCode();
         }
     });
+    createEffect(
+        on(refreshCount, () => {
+            if (iframeRef() && currentArtifact()) {
+                runCode();
+            }
+        }),
+    );
 
     return (
         <>

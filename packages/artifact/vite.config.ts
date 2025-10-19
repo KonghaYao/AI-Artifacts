@@ -20,7 +20,7 @@ export default defineConfig({
             fileName: 'index',
         },
         rollupOptions: {
-            external: ['solid-js', 'solid-js/web', 'comlink', 'prismjs'],
+            external: ['solid-js', 'comlink', 'prismjs'],
         },
     },
 });

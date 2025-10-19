@@ -5,7 +5,7 @@ export const sampleData = {
             {
                 id: 'react-component',
                 filename: 'Button.tsx',
-                filetype: 'application/vnd.ant.tsx',
+                filetype: 'application/vnd.ant.react',
                 created_at: '2024-01-15T10:00:00Z',
                 updated_at: '2024-01-15T10:00:00Z',
                 versions: [
@@ -14,7 +14,7 @@ export const sampleData = {
                         id: 'v1',
                         version: 1,
                         filename: 'Button.tsx',
-                        filetype: 'application/vnd.ant.tsx',
+                        filetype: 'application/vnd.ant.react',
                         code: `import React from 'react';
 
 interface ButtonProps {
