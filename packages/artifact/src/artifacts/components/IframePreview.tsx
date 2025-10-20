@@ -64,6 +64,7 @@ export const IframePreview = () => {
                 ref={setIframeRef}
                 src="https://langgraph-artifacts.netlify.app/index.html"
                 class="w-full h-full border-none"
+                show-console
             />
             {isLoading() && (
                 <div class="absolute inset-0 bg-background/70 backdrop-blur-[1px] flex items-center justify-center z-10">

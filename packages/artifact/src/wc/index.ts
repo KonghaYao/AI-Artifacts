@@ -113,14 +113,14 @@ export function createSolidWebComponent<TProps extends Record<string, any> = Rec
         .map((config) => config.attribute);
     // 创建原生 Web Component 类
     class SolidWebComponent extends HTMLElement {
-        private propsStore: any;
-        private setPropsStore: any;
-        private observer: MutationObserver | null = null;
-        private mounted = false;
-        private propMappings: typeof propMappings;
-        private SolidComponent: typeof SolidComponent;
-        private styles?: string;
-        private componentTagName: string;
+        propsStore: any;
+        setPropsStore: any;
+        observer: MutationObserver | null = null;
+        mounted = false;
+        propMappings: typeof propMappings;
+        SolidComponent: Component<any>;
+        styles?: string;
+        componentTagName: string;
 
         // 获取要监听的属性列表
         static observedAttributes = observedAttributes;
@@ -195,7 +195,7 @@ export function createSolidWebComponent<TProps extends Record<string, any> = Rec
         }
 
         // 渲染 Solid 组件
-        private renderSolidComponent() {
+        renderSolidComponent() {
             // 创建包装组件
             const WrapperComponent = () => {
                 return this.SolidComponent(this.propsStore);

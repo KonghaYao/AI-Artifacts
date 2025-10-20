@@ -1,17 +1,9 @@
 import { defineConfig } from 'vite';
 import UnoCSS from 'unocss/vite';
 import solid from 'vite-plugin-solid';
-
+import dts from 'vite-plugin-dts';
 export default defineConfig({
-    plugins: [
-        UnoCSS({
-            // mode: 'shadow-dom',
-            // content: {
-            //     filesystem: ['src/**/*.tsx'],
-            // },
-        }),
-        solid(),
-    ],
+    plugins: [UnoCSS({}), solid(), dts()],
     build: {
         target: 'esnext',
         lib: {

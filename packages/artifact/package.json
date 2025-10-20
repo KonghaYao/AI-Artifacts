@@ -1,10 +1,10 @@
 {
     "name": "ai-artifacts",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
-    "types": "src/artifacts/index.ts",
+    "types": "dist/artifacts/index.d.ts",
     "files": [
         "dist"
     ],
