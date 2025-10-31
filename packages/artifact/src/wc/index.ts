@@ -226,9 +226,12 @@ export function createSolidWebComponent<TProps extends Record<string, any> = Rec
         }
     }
 
-    // 注册 Web Component
-    customElements.define(tagName, SolidWebComponent);
-
+    // 检查是否已经注册过该组件，避免重复注册
+    if (!customElements.get(tagName)) {
+        customElements.define(tagName, SolidWebComponent);
+    } else {
+        console.warn(`Component "${tagName}" is already defined. Skipping registration.`);
+    }
     return {
         tagName,
         ComponentClass: SolidWebComponent,
