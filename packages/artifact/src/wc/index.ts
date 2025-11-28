@@ -33,7 +33,7 @@ export interface WebComponentOptions<TProps extends Record<string, any> = Record
             /**
              * 属性类型
              */
-            type?: 'string' | 'number' | 'boolean' | 'json';
+            type?: 'string' | 'number' | 'boolean' | 'json' | 'function';
             /**
              * 默认值
              */
@@ -88,6 +88,10 @@ const typeConverters = {
         } catch {
             return value;
         }
+    },
+    function: (value: string | null) => {
+        if (!value) return undefined;
+        return eval(value);
     },
 };
 

@@ -1,3 +1,4 @@
+import mitt from 'mitt';
 import { createStore } from 'solid-js/store';
 
 export interface ArtifactType {
@@ -24,6 +25,35 @@ export interface ArtifactVersion {
     updated_at: string;
 }
 
+export interface ErrorLabel {
+    message: string;
+    start: number;
+    end: number;
+}
+
+export interface ErrorItem {
+    severity: string;
+    message: string;
+    labels: ErrorLabel[];
+    codeframe: string;
+}
+
+export interface ErrorData {
+    status: 'error';
+    errors: ErrorItem[];
+    canSendBack?: boolean;
+}
+
 export const [artifactStore, setArtifactStore] = createStore({
     artifacts: {} as Record<string, ArtifactType[]>,
 });
+
+export const eventCenter = mitt<{
+    sendBackToAI: {
+        storeId: string;
+        groupId: string;
+        versionId: string;
+        file: string;
+        error: string;
+    };
+}>();

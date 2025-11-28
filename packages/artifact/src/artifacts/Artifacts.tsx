@@ -8,13 +8,16 @@ import {
     type JSX,
     type Setter,
 } from 'solid-js';
-import { type ArtifactVersion, type ArtifactType, artifactStore } from './global';
+import { type ArtifactVersion, type ArtifactType, type ErrorData, artifactStore } from './global';
 
 export type ViewMode = 'preview' | 'source';
 
 interface ArtifactsContextType {
     artifacts: () => ArtifactType[];
     currentArtifact: () => ArtifactVersion | undefined;
+    storeId: () => string;
+    groupId: () => string;
+    versionId: () => string;
     setCurrentArtifactById: (group_id: string, id: string) => void;
     viewMode: Accessor<ViewMode>;
     setViewMode: Setter<ViewMode>;
@@ -22,6 +25,9 @@ interface ArtifactsContextType {
     setIsLoading: Setter<boolean>;
     refreshCount: Accessor<number>;
     refresh: () => void;
+    error: Accessor<ErrorData | null>;
+    setError: Setter<ErrorData | null>;
+    canSendBack: () => void;
 }
 
 const ArtifactsContext = createContext<ArtifactsContextType>();
@@ -34,6 +40,7 @@ export const ArtifactsProvider = (props: {
         group_id: string;
         version_id: string;
     };
+    canSendBack?: () => void;
     children: JSX.Element;
 }) => {
     const [showingArtifact, setShowingArtifact] = createSignal(props.defaultArtifact);
@@ -51,6 +58,7 @@ export const ArtifactsProvider = (props: {
     const [viewMode, setViewMode] = createSignal<ViewMode>('preview');
     const [isLoading, setIsLoading] = createSignal<boolean>(false);
     const [refreshCount, setRefreshCount] = createSignal<number>(0);
+    const [error, setError] = createSignal<ErrorData | null>(null);
     const refresh = () => {
         setRefreshCount(refreshCount() + 1);
     };
@@ -59,6 +67,9 @@ export const ArtifactsProvider = (props: {
             value={{
                 artifacts: artifacts,
                 currentArtifact: currentArtifact,
+                storeId: () => props.store_id,
+                groupId: () => showingArtifact().group_id,
+                versionId: () => showingArtifact().version_id,
                 setCurrentArtifactById(group_id: string, version_id: string) {
                     setShowingArtifact({
                         group_id: group_id,
@@ -71,6 +82,9 @@ export const ArtifactsProvider = (props: {
                 setIsLoading: setIsLoading,
                 refreshCount: refreshCount,
                 refresh: refresh,
+                error,
+                setError,
+                canSendBack: props.canSendBack || (() => {}),
             }}
         >
             {props.children}

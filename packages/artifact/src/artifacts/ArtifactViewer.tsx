@@ -2,7 +2,12 @@ import { ArtifactsProvider, useArtifacts } from './Artifacts';
 import { SourceCodeViewer } from './SourceCodeViewer';
 import { ArtifactHeader, ArtifactPreview, ArtifactFooter } from './components';
 
-export const ArtifactViewer = (props: { storeId: string; groupId: string; versionId: string }) => {
+export const ArtifactViewer = (props: {
+    storeId: string;
+    groupId: string;
+    versionId: string;
+    canSendBack?: () => void;
+}) => {
     return (
         <ArtifactsProvider
             store_id={props.storeId}
@@ -10,6 +15,7 @@ export const ArtifactViewer = (props: { storeId: string; groupId: string; versio
                 group_id: props.groupId,
                 version_id: props.versionId,
             }}
+            canSendBack={props.canSendBack}
         >
             <ArtifactViewerContent />
         </ArtifactsProvider>

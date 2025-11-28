@@ -7,6 +7,7 @@ import 'virtual:uno.css';
 solidToWebComponent(
     'ai-artifacts',
     (props: any) => {
+        console.log(props);
         return ArtifactViewer(props);
     },
     {
@@ -27,6 +28,12 @@ solidToWebComponent(
                 attribute: 'version-id',
                 type: 'string',
                 defaultValue: 'v1',
+                observe: true,
+            },
+            canSendBack: {
+                attribute: 'can-send-back',
+                type: 'string',
+                defaultValue: 'false',
                 observe: true,
             },
         },
