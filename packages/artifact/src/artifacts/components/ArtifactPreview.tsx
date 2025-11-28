@@ -5,7 +5,7 @@ import { SourceCodeViewer } from '../SourceCodeViewer';
 import { PreviewType, getPreviewConfig } from '../config/previewConfig';
 import { useArtifacts } from '../Artifacts';
 
-export const ArtifactPreview = () => {
+export const ArtifactPreview = (props: { src?: string }) => {
     const { currentArtifact } = useArtifacts();
     // 获取预览配置
     const previewConfig = createMemo(() => {
@@ -19,7 +19,7 @@ export const ArtifactPreview = () => {
             }
         >
             <Match when={previewConfig().type === PreviewType.IFRAME}>
-                <IframePreview />
+                <IframePreview src={props.src} />
             </Match>
 
             {/* <Match when={previewConfig().type === PreviewType.MARKDOWN}>

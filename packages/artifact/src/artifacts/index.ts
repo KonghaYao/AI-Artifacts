@@ -36,6 +36,12 @@ solidToWebComponent(
                 defaultValue: 'false',
                 observe: true,
             },
+            src: {
+                attribute: 'src',
+                type: 'string',
+                defaultValue: 'https://langgraph-artifacts.netlify.app/index.html',
+                observe: true,
+            },
         },
         shadow: import.meta.env.PROD ? true : false,
         styles: `@unocss-placeholder

@@ -4,7 +4,7 @@ import { Loader2, AlertCircle, X, Send } from 'lucide-solid';
 import { useArtifacts } from '../Artifacts';
 import { eventCenter, type ErrorData } from '../global';
 
-export const IframePreview = () => {
+export const IframePreview = (props: { src?: string }) => {
     const { currentArtifact, setIsLoading, isLoading, refreshCount, error, setError, storeId, groupId, versionId } =
         useArtifacts();
     const [iframeRef, setIframeRef] = createSignal<HTMLIFrameElement | undefined>(undefined);
@@ -91,7 +91,7 @@ export const IframePreview = () => {
         <>
             <iframe
                 ref={setIframeRef}
-                src="https://langgraph-artifacts.netlify.app/index.html"
+                src={props.src || 'https://langgraph-artifacts.netlify.app/index.html'}
                 class="w-full h-full border-none"
                 show-console
             />
